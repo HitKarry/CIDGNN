@@ -11,7 +11,7 @@ Multivariate spatiotemporal graph data generation technology is crucial for the 
 
 - [System Requirements](#system-requirements)
 - [Installation Guide](#installation-guide)
-- [Setting up the development environment](#setting-up-the-development-environment)
+- [Instructions to run on data](#Instructions-to-run-on-data)
 - [License](#license)
 
 
@@ -47,6 +47,10 @@ tqdm==4.66.4
 tvm==1.0.0
 xarray==2022.11.0
 ```
+
+# Instructions to run on data
+Due to the large size of the data and weight files, we host them on other data platforms, please download the relevant data from the link below.
+
 
 # License
 
