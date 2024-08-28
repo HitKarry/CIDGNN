@@ -49,8 +49,16 @@ xarray==2022.11.0
 ```
 
 # Instructions to run on data
+
 Due to the large size of the data and weight files, we host them on other data platforms, please download the relevant data from the link below.
 
+Input data：
+
+Output data：
+
+Weight data：
+
+Put the downloaded data into the specified folder, execute main.py to run and generate the result data, and evaluate.py to automate the quantitative evaluation of the data to generate the result.
 
 # License
 
