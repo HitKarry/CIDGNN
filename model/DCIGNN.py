@@ -237,8 +237,6 @@ class gcn(nn.Module):
         self.act = nn.GELU()
 
     def forward(self, x, a):
-        # in: [B, T, N, DM]
-        # out: [B, T, N, DM]
         if self.gnn_type == 'time':
             x = x.transpose(1, 2)
 
@@ -467,7 +465,6 @@ class Model(nn.Module):
         self.scale_number = configs.scale_number
 
     def forward(self, x):
-        # x: [B,T,C,N]
         if self.anti_ood:
             seq_last = x[:, -1:, :, :].detach()
             x = x - seq_last
