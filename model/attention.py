@@ -17,15 +17,13 @@ class channel_embedding(nn.Module):
         self.norm = nn.LayerNorm(d_model)
 
     def forward(self, x):
-        """
-        [B, T_56, C, N]
-        [B, T_56, C, N, D]
-        """
         assert len(x.size()) == 4
         x = x[:,:,:,:,None]
         embedded_channel = self.emb_channel(self.channel_pos)
         x = self.linear(x) + embedded_channel
         return self.norm(x)
+
+
 class MultiHeadedAttention(nn.Module):
     def __init__(self, d_model, nheads, attn, dropout):
         super().__init__()
@@ -37,10 +35,6 @@ class MultiHeadedAttention(nn.Module):
         self.attn = attn
 
     def forward(self, query, key, value, mask=None):
-        """
-         [B, T_56, C, N, D]
-         [B, T_56, C, N, D]
-        """
         nbatches = query.size(0)
         ntime = query.size(1)
         nchannel = query.size(2)
@@ -58,8 +52,10 @@ class MultiHeadedAttention(nn.Module):
              .view(nbatches, ntime, nchannel, nnode, self.nheads * self.d_k)
         return self.linears[-1](x)
 
+
 def clones(module, N):
     return nn.ModuleList([copy.deepcopy(module) for _ in range(N)])
+
 
 class SublayerConnection(nn.Module):
     def __init__(self, size, dropout):
@@ -70,11 +66,8 @@ class SublayerConnection(nn.Module):
     def forward(self, x, sublayer):
         return self.norm(x + self.dropout(sublayer(x)))
 
+
 def TimeAttention(query, key, value, dropout=None):
-    """
-    [B, h, T_56, C, N, d_k]
-    [B, h, T_56, C, N, d_k]
-    """
     d_k = query.size(-1)
     query = query.transpose(2, 4)
     key = key.transpose(2, 4)
@@ -84,6 +77,7 @@ def TimeAttention(query, key, value, dropout=None):
     if dropout is not None:
         p_attn = dropout(p_attn)
     return torch.matmul(p_attn, value).transpose(2, 4)
+
 
 class AttentionLayer(nn.Module):
     def __init__(self, dim_feedforward=512,d_model=256, nheads=4, attn=TimeAttention, dropout=0.2):
