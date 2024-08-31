@@ -1,7 +1,7 @@
 import torch
 import random
 import numpy as np
-from model.DCIGNN import Model
+from model.CIDGNN import Model
 from config import configs
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
