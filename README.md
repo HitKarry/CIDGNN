@@ -62,4 +62,4 @@ Put the downloaded data into the specified folder, execute main.py to run and ge
 
 # License
 
-This project is covered under the **Apache 2.0 License**.
+This project is covered under the **MIT License**.
